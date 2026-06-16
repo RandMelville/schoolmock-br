@@ -1,0 +1,69 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "schoolmock-br"
+version = "2.0.0a0"
+description = "Gerador procedural de dados educacionais brasileiros sintéticos (LGPD-safe) com camada de verificação determinística."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Randerson Oliveira Melville Rebouças", email = "randerson.melville@gmail.com" },
+]
+keywords = [
+    "synthetic-data",
+    "education",
+    "brazil",
+    "lgpd",
+    "inep",
+    "censo-escolar",
+    "mock-data",
+    "testing",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: Portuguese (Brazilian)",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Education",
+    "Topic :: Software Development :: Testing",
+]
+dependencies = [
+    "faker>=20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.4",
+    "mypy>=1.8",
+]
+
+[project.urls]
+Homepage = "https://github.com/RandMelville/schoolmock-br"
+Repository = "https://github.com/RandMelville/schoolmock-br"
+DOI = "https://doi.org/10.5281/zenodo.18343467"
+
+[project.scripts]
+schoolmock = "schoolmock_br.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/schoolmock_br"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]

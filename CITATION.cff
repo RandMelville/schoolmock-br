@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "Se você usar este software ou dataset, por favor cite-o conforme abaixo."
+title: "SchoolMock-BR: gerador procedural de dados educacionais brasileiros sintéticos (LGPD-safe) com verificação determinística"
+type: software
+authors:
+  - family-names: "Melville Rebouças"
+    given-names: "Randerson Oliveira"
+    affiliation: "PPGIE/UFRGS"
+repository-code: "https://github.com/RandMelville/schoolmock-br"
+license: MIT
+version: "2.0.0a0"
+doi: "10.5281/zenodo.18343467"
+keywords:
+  - synthetic-data
+  - education
+  - brazil
+  - lgpd
+  - inep
+  - mock-data
+  - testing
+abstract: >
+  SchoolMock-BR é um gerador procedural, baseado em regras de domínio, de dados
+  educacionais brasileiros sintéticos (alunos, turmas e escolas) estruturalmente
+  válidos mas inteiramente fictícios. O v2 adiciona reprodutibilidade por semente,
+  uma camada de verificação determinística (critérios C1–C5: CPF, INEP↔UF,
+  idade↔série, campos obrigatórios e unicidade) e um construtor de dataset
+  relacional, voltado a testes de software educacional administrativo em
+  conformidade com a LGPD por construção.

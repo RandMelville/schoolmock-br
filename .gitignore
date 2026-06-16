@@ -1,0 +1,22 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Build / empacotamento
+build/
+dist/
+*.egg-info/
+src/*.egg-info/
+
+# Caches Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Documento interno de estratégia/roadmap (não publicar)
+PLANO-V2.md
