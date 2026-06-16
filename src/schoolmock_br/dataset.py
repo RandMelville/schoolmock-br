@@ -113,6 +113,7 @@ def construir_dataset(
     series: tuple[str, ...] = SERIES_PADRAO,
     ano_letivo: int = 2026,
     verificar: bool = True,
+    modo_teste: bool = False,
 ) -> Dataset:
     """
     Constrói um dataset relacional sintético reprodutível.
@@ -125,8 +126,10 @@ def construir_dataset(
         series: séries elegíveis para as turmas.
         ano_letivo: ano letivo registrado em turmas/metadados.
         verificar: se True, roda o verificador e anexa o resumo de conformidade aos metadados.
+        modo_teste: se True (F3), gera CPFs com prefixo sentinela, reconhecíveis como
+            sintéticos (ver `cpf.cpf_marcado_para_teste`).
     """
-    gerador = Gerador(seed=seed)
+    gerador = Gerador(seed=seed, modo_teste=modo_teste)
     rng = gerador._rng  # mesma fonte semeada, para amostragem reprodutível das contagens
 
     vistos_escola = {"codigo_inep": set()}
@@ -177,6 +180,7 @@ def construir_dataset(
         "versao": __version__,
         "tipo": "dados educacionais sintéticos (procedural, LGPD-safe)",
         "seed": seed,
+        "modo_teste": modo_teste,
         "ano_letivo": ano_letivo,
         "gerado_em": date.today().isoformat(),
         "contagens": {"escolas": len(escolas), "turmas": len(turmas), "alunos": len(alunos)},

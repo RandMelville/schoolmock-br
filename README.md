@@ -126,8 +126,11 @@ dados pessoais de menores onde ele não é necessário.
   distribuições reais de uma população (proporções por rede/UF/série). Calibração contra marginais
   públicas do Censo Escolar é um trabalho futuro (F7 no roadmap).
 * **Risco residual de colisão de CPF.** Um CPF sintético, embora fictício, pode por coincidência
-  coincidir com o de uma pessoa real (o espaço de CPFs válidos é finito). Não use os identificadores
-  para nenhuma finalidade que pressuponha titularidade real.
+  coincidir com o de uma pessoa real (o espaço de CPFs válidos é finito e não há faixa oficial de
+  teste). Não use os identificadores para nenhuma finalidade que pressuponha titularidade real.
+  O modo opcional `--modo-teste` (F3) fixa um prefixo sentinela (`999…`) nos CPFs, tornando-os
+  reconhecíveis como sintéticos (`cpf_marcado_para_teste()`) — mitigação por *detectabilidade*,
+  não garantia de não-colisão.
 * **Escopo administrativo.** A ferramenta foi pensada para testes de software educacional
   administrativo (cadastros, carga, conformidade), não como corpus de treinamento de modelos.
 
