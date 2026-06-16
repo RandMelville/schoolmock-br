@@ -29,8 +29,11 @@ _SITUACOES = ["Cursando", "Cursando", "Cursando", "Transferido"]
 class Gerador:
     """Gerador reprodutível de dados educacionais sintéticos."""
 
-    def __init__(self, seed: int | None = None, locale: str = "pt_BR") -> None:
+    def __init__(
+        self, seed: int | None = None, locale: str = "pt_BR", *, modo_teste: bool = False
+    ) -> None:
         self.seed = seed
+        self.modo_teste = modo_teste  # F3: CPFs com prefixo sentinela (reconhecíveis)
         self._rng = random.Random(seed)
         self._fake = Faker(locale)
         if seed is not None:
@@ -47,7 +50,7 @@ class Gerador:
         )
         return {
             "nome_completo": self._fake.name(),
-            "cpf": gerar_cpf(self._rng, rejeitar_invalidos=True),
+            "cpf": gerar_cpf(self._rng, rejeitar_invalidos=True, modo_teste=self.modo_teste),
             "data_nascimento": nascimento.strftime("%d/%m/%Y"),
             "nome_mae": self._fake.name_female(),
             "matricula": str(self._rng.randint(10000000, 99999999)),

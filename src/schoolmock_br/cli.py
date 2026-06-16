@@ -33,7 +33,7 @@ def _exportar(registros: list[dict], formato: str) -> str:
 
 
 def _cmd_gerar(args: argparse.Namespace) -> int:
-    gerador = Gerador(seed=args.seed)
+    gerador = Gerador(seed=args.seed, modo_teste=args.modo_teste)
     if args.tipo == "aluno":
         registros = gerador.gerar_turma_lote(qtd=args.n, serie=args.serie)
     else:
@@ -69,7 +69,7 @@ def _cmd_benchmark(args: argparse.Namespace) -> int:
 
 
 def _cmd_dataset(args: argparse.Namespace) -> int:
-    ds = construir_dataset(seed=args.seed, n_escolas=args.escolas)
+    ds = construir_dataset(seed=args.seed, n_escolas=args.escolas, modo_teste=args.modo_teste)
     if args.formato == "csv":
         destino = args.out or "dataset"
         escritos = ds.export_csv(destino)
@@ -103,6 +103,10 @@ def build_parser() -> argparse.ArgumentParser:
     g.add_argument("--seed", type=int, default=None)
     g.add_argument("--formato", choices=["json", "csv"], default="json")
     g.add_argument("--out", default=None)
+    g.add_argument(
+        "--modo-teste", dest="modo_teste", action="store_true",
+        help="Gera CPFs com prefixo sentinela, reconhecíveis como sintéticos (F3).",
+    )
     g.set_defaults(func=_cmd_gerar)
 
     v = sub.add_parser("verificar", help="Verifica um arquivo JSON contra C1–C5.")
@@ -119,6 +123,10 @@ def build_parser() -> argparse.ArgumentParser:
     d.add_argument("--seed", type=int, default=42)
     d.add_argument("--formato", choices=["json", "csv"], default="json")
     d.add_argument("--out", default=None, help="Arquivo (json) ou diretório (csv).")
+    d.add_argument(
+        "--modo-teste", dest="modo_teste", action="store_true",
+        help="Gera CPFs com prefixo sentinela, reconhecíveis como sintéticos (F3).",
+    )
     d.set_defaults(func=_cmd_dataset)
 
     return parser

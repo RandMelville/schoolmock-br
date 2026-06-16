@@ -1,5 +1,6 @@
 import json
 
+from schoolmock_br.cpf import cpf_marcado_para_teste
 from schoolmock_br.dataset import construir_dataset
 
 
@@ -53,6 +54,26 @@ def test_aluno_herda_serie_da_turma():
     ds = _dataset()
     serie_por_turma = {t["turma_id"]: t["serie"] for t in ds.turmas}
     assert all(a["serie_atual"] == serie_por_turma[a["turma_id"]] for a in ds.alunos)
+
+
+def test_modo_teste_marca_todos_os_cpfs_e_mantem_conformidade():
+    ds = construir_dataset(
+        seed=7, n_escolas=5, turmas_por_escola=(2, 3),
+        alunos_por_turma=(10, 15), modo_teste=True,
+    )
+    assert ds.metadata["modo_teste"] is True
+    assert all(cpf_marcado_para_teste(a["cpf"]) for a in ds.alunos)
+    # marcar não pode quebrar C1–C5
+    assert ds.metadata["conformidade"]["alunos"]["taxa"] == 1.0
+    # e os identificadores seguem únicos no lote (C5)
+    cpfs = [a["cpf"] for a in ds.alunos]
+    assert len(cpfs) == len(set(cpfs))
+
+
+def test_modo_teste_desligado_por_padrao():
+    ds = _dataset()
+    assert ds.metadata["modo_teste"] is False
+    assert not any(cpf_marcado_para_teste(a["cpf"]) for a in ds.alunos)
 
 
 def test_export_json(tmp_path):

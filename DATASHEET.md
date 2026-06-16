@@ -99,8 +99,12 @@ publicação com DOI no Zenodo.
 dado pessoal** na acepção do art. 5º, I, da Lei nº 13.709/2018 (LGPD); o regime de tratamento — e a
 exigência de consentimento do art. 14, sobre dados de crianças e adolescentes — **não incide sobre
 os registros sintéticos**. A ferramenta apoia os princípios de necessidade e minimização (art. 6º).
-**Risco residual:** um CPF sintético pode, por coincidência, coincidir com o de uma pessoa real;
-trate os identificadores como fictícios e não os associe a titulares reais.
+**Risco residual:** existem ~10⁹ CPFs válidos por mód-11 e ~2×10⁸ já atribuídos pela Receita, de modo
+que um CPF sintético pode, por coincidência, coincidir com o de uma pessoa real — e **não há faixa
+oficial de CPF de teste** que elimine isso. Trate os identificadores como fictícios e não os associe a
+titulares reais. **Mitigação (modo teste / F3):** o gerador oferece um modo opcional que fixa um
+prefixo sentinela documentado (`999…`) nos CPFs, tornando-os reconhecíveis como sintéticos via
+`cpf_marcado_para_teste()`; isso garante *detectabilidade/auditabilidade*, não ausência de colisão.
 
 ## 7. Manutenção
 
