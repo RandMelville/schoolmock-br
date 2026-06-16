@@ -2,6 +2,7 @@
 
 > **Gerador procedural de dados educacionais brasileiros sintéticos — realistas, mas fictícios — com camada de verificação determinística. Privacidade por construção (LGPD-safe).**
 
+[![CI](https://github.com/RandMelville/schoolmock-br/actions/workflows/ci.yml/badge.svg)](https://github.com/RandMelville/schoolmock-br/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Beta%20(v2)-green)]()
