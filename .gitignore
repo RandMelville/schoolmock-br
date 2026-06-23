@@ -20,3 +20,6 @@ htmlcov/
 
 # Documento interno de estratégia/roadmap (não publicar)
 PLANO-V2.md
+
+# Artefato do dataset oficial (publicado no Zenodo/HF, não no Git)
+dist-dataset/

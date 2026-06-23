@@ -102,6 +102,10 @@ Cada registro carrega o campo `fonte` (marcação de origem sintética) e os met
 `seed`, contagens e o resumo de conformidade. Veja o **[DATASHEET.md](DATASHEET.md)** para a
 documentação completa no padrão *Datasheets for Datasets* (Gebru et al., 2018).
 
+Além de gerar dados sob demanda, o projeto publica um **dataset oficial congelado e citável**
+(100 escolas · 450 turmas · 12.505 alunos, CC-BY 4.0). A receita reprodutível e os checksums
+oficiais estão em **[DATASET.md](DATASET.md)**.
+
 ## ⚖️ Enquadramento legal (LGPD)
 
 Os registros gerados são **dados sintéticos**: produzidos proceduralmente, **não se referem a
@@ -146,9 +150,11 @@ ruff check src tests
 
 Se este trabalho for útil em sua pesquisa, cite o software via o **DOI conceitual** do Zenodo
 ([10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098) — resolve sempre para a versão
-mais recente) ou use o arquivo [`CITATION.cff`](CITATION.cff). Para citar especificamente a
-**v2.0.0**, use o DOI desta versão
-([10.5281/zenodo.20806099](https://doi.org/10.5281/zenodo.20806099)). O Manual Técnico v1 está
+mais recente) ou use o arquivo [`CITATION.cff`](CITATION.cff). Para citar uma versão específica,
+use o *version DOI* correspondente: a release atual **v2.1.0** é
+[10.5281/zenodo.20806846](https://doi.org/10.5281/zenodo.20806846); a primeira, **v2.0.0**, é
+[10.5281/zenodo.20806099](https://doi.org/10.5281/zenodo.20806099).
+O Manual Técnico v1 está
 registrado sob o ISBN 978-65-01-89921-3 (DOI
 [10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)).
 
