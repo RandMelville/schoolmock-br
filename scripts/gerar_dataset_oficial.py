@@ -19,6 +19,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import sys
+import zipfile
 from pathlib import Path
 
 # O schoolmock_br.py da RAIZ (v1 congelado) sombrearia o pacote em src/ quando o
@@ -45,7 +46,7 @@ TITULO = "SchoolMock-BR — Dataset Educacional Sintético de Referência"
 AUTOR = "Randerson Oliveira Melville Rebouças (PPGIE/UFRGS)"
 # DOI do dataset no Zenodo (emitido na publicação). Preencher quando reservado;
 # enquanto None, o card mostra "(a ser emitido)".
-DOI_DATASET: str | None = None
+DOI_DATASET: str | None = "10.5281/zenodo.20806934"
 # -----------------------------------------------------------------------------
 
 
@@ -180,12 +181,24 @@ def main() -> None:
     # Documentação do pacote de publicação (não entra no manifesto de dados).
     (out / "README.md").write_text(_card_md(c, conf), encoding="utf-8")
     (out / "LICENSE").write_text(LICENSE_TXT, encoding="utf-8")
+
+    # ZIP único para anexar no Zenodo (download limpo). A verificação de
+    # integridade é feita pelos SHA-256 dos arquivos internos (não pelo zip,
+    # cujo hash varia com mtimes); por isso o SHA256SUMS.txt também fica solto.
+    raiz = f"schoolmock-br-dataset-v{DATASET_VERSION}"
+    zip_path = out / f"{raiz}.zip"
+    no_zip = [json_path, *sorted(csv_dir.glob("*.csv")), csv_dir / "metadata.json",
+              sums_path, out / "README.md", out / "LICENSE"]
+    with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+        for p in no_zip:
+            zf.write(p, arcname=f"{raiz}/{p.relative_to(out)}")
     print(f"  escolas={c['escolas']} turmas={c['turmas']} alunos={c['alunos']}")
     print(f"  conformidade alunos={conf['alunos']['taxa']} escolas={conf['escolas']['taxa']}")
     print(f"  JSON: {json_path}  ({json_path.stat().st_size / 1024:.0f} KB)")
     print(f"  CSV:  {csv_dir}/")
     print(f"  Checksums: {sums_path}")
     print(f"  Card+licença: {out / 'README.md'}, {out / 'LICENSE'}")
+    print(f"  ZIP p/ Zenodo: {zip_path}  ({zip_path.stat().st_size / 1024:.0f} KB)")
     print("OK.")
 
 
