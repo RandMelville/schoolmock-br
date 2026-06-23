@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "schoolmock-br"
-version = "2.0.0a0"
+version = "2.0.0"
 description = "Gerador procedural de dados educacionais brasileiros sintéticos (LGPD-safe) com camada de verificação determinística."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -23,7 +23,7 @@ keywords = [
     "testing",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",
     "License :: OSI Approved :: MIT License",
@@ -57,6 +57,19 @@ schoolmock = "schoolmock_br.cli:main"
 [tool.hatch.build.targets.wheel]
 packages = ["src/schoolmock_br"]
 
+# Conteúdo explícito do sdist: evita que arquivos soltos não-rastreados
+# (ex.: o PDF do manual, .claude/) vazem para o pacote publicado.
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/README.md",
+    "/DATASHEET.md",
+    "/LICENSE",
+    "/CITATION.cff",
+    "/pyproject.toml",
+]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q"
@@ -64,6 +77,9 @@ addopts = "-q"
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+# schoolmock_br.py (raiz) = v1 congelado / baseline científico imutável (preserva
+# os bugs G1–G7): nunca deve ser lintado nem alterado.
+extend-exclude = ["schoolmock_br.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
