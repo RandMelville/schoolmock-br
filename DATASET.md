@@ -59,12 +59,13 @@ c019ce8572ef5028a79205f74d3ca1649cc5e0bba14a658feba6af07216a2f85  schoolmock-br-
 
 | Onde | Papel | Referência |
 |---|---|---|
-| Zenodo | Primário (DOI, preservação, CC-BY) | _a preencher após reservar o DOI_ |
+| Zenodo | Primário (DOI, preservação, CC-BY) | [10.5281/zenodo.20806934](https://doi.org/10.5281/zenodo.20806934) |
 | Hugging Face | Espelho (`load_dataset`, descoberta) | _a preencher_ |
 
-Linkar o record do dataset ao do software (`is supplement to`,
-[10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098)) e ao Manual
-Técnico ([10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)).
+O record do dataset liga-se ao software (`is supplement to`
+[10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098); `is derived from`
+a v2.1.0 [10.5281/zenodo.20806846](https://doi.org/10.5281/zenodo.20806846)) e ao Manual
+Técnico (`is documented by` [10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)).
 
 ## Natureza dos dados
 
