@@ -6,7 +6,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![Status](https://img.shields.io/badge/Status-Stable%20(v2)-brightgreen)]()
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.18343467.svg)](https://doi.org/10.5281/zenodo.18343467)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20806098.svg)](https://doi.org/10.5281/zenodo.20806098)
 
 ## 🎯 Objetivo
 
@@ -144,9 +144,13 @@ ruff check src tests
 
 ## 📚 Como citar
 
-Se este trabalho for útil em sua pesquisa, cite via o DOI do Zenodo
-([10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)) ou use o arquivo
-[`CITATION.cff`](CITATION.cff). O v1 está registrado sob o ISBN 978-65-01-89921-3.
+Se este trabalho for útil em sua pesquisa, cite o software via o **DOI conceitual** do Zenodo
+([10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098) — resolve sempre para a versão
+mais recente) ou use o arquivo [`CITATION.cff`](CITATION.cff). Para citar especificamente a
+**v2.0.0**, use o DOI desta versão
+([10.5281/zenodo.20806099](https://doi.org/10.5281/zenodo.20806099)). O Manual Técnico v1 está
+registrado sob o ISBN 978-65-01-89921-3 (DOI
+[10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)).
 
 ## 📄 Licença
 
