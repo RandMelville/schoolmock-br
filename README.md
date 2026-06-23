@@ -102,6 +102,10 @@ Cada registro carrega o campo `fonte` (marcação de origem sintética) e os met
 `seed`, contagens e o resumo de conformidade. Veja o **[DATASHEET.md](DATASHEET.md)** para a
 documentação completa no padrão *Datasheets for Datasets* (Gebru et al., 2018).
 
+Além de gerar dados sob demanda, o projeto publica um **dataset oficial congelado e citável**
+(100 escolas · 450 turmas · 12.505 alunos, CC-BY 4.0). A receita reprodutível e os checksums
+oficiais estão em **[DATASET.md](DATASET.md)**.
+
 ## ⚖️ Enquadramento legal (LGPD)
 
 Os registros gerados são **dados sintéticos**: produzidos proceduralmente, **não se referem a

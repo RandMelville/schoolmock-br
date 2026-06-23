@@ -84,3 +84,7 @@ extend-exclude = ["schoolmock_br.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# scripts/ contém receitas com Markdown embutido (cards/licença): linhas longas ok.
+"scripts/*" = ["E501"]
