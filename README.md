@@ -151,8 +151,9 @@ ruff check src tests
 Se este trabalho for útil em sua pesquisa, cite o software via o **DOI conceitual** do Zenodo
 ([10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098) — resolve sempre para a versão
 mais recente) ou use o arquivo [`CITATION.cff`](CITATION.cff). Para citar uma versão específica,
-use o *version DOI* correspondente listado no registro Zenodo do software
-(a primeira release, **v2.0.0**, é [10.5281/zenodo.20806099](https://doi.org/10.5281/zenodo.20806099)).
+use o *version DOI* correspondente: a release atual **v2.1.0** é
+[10.5281/zenodo.20806846](https://doi.org/10.5281/zenodo.20806846); a primeira, **v2.0.0**, é
+[10.5281/zenodo.20806099](https://doi.org/10.5281/zenodo.20806099).
 O Manual Técnico v1 está
 registrado sob o ISBN 978-65-01-89921-3 (DOI
 [10.5281/zenodo.18343467](https://doi.org/10.5281/zenodo.18343467)).
