@@ -25,6 +25,19 @@ from .data.series import faixa_etaria_esperada
 
 _SITUACOES = ["Cursando", "Cursando", "Cursando", "Transferido"]
 
+# Pronomes de tratamento que o Faker pt_BR antepõe a ~16% dos nomes (Sr./Dr./Sra./...).
+# São irreais para um cadastro de alunos (crianças/adolescentes) e do Censo Escolar,
+# então os removemos preservando o restante do nome (o pt_BR não usa sufixos).
+_PREFIXOS_TRATAMENTO = ("Sr.", "Sra.", "Srta.", "Dr.", "Dra.")
+
+
+def _sem_tratamento(nome: str) -> str:
+    """Remove um pronome de tratamento inicial do nome, se houver."""
+    primeiro, _, resto = nome.partition(" ")
+    if primeiro in _PREFIXOS_TRATAMENTO and resto:
+        return resto
+    return nome
+
 
 class Gerador:
     """Gerador reprodutível de dados educacionais sintéticos."""
@@ -49,10 +62,10 @@ class Gerador:
             minimum_age=idade_min, maximum_age=idade_max
         )
         return {
-            "nome_completo": self._fake.name(),
+            "nome_completo": _sem_tratamento(self._fake.name()),
             "cpf": gerar_cpf(self._rng, rejeitar_invalidos=True, modo_teste=self.modo_teste),
             "data_nascimento": nascimento.strftime("%d/%m/%Y"),
-            "nome_mae": self._fake.name_female(),
+            "nome_mae": _sem_tratamento(self._fake.name_female()),
             "matricula": str(self._rng.randint(10000000, 99999999)),
             "situacao": self._rng.choice(_SITUACOES),
             "serie_atual": serie_escolar,

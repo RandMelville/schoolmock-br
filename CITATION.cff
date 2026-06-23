@@ -8,8 +8,8 @@ authors:
     affiliation: "PPGIE/UFRGS"
 repository-code: "https://github.com/RandMelville/schoolmock-br"
 license: MIT
-version: "2.0.0"
-date-released: "2026-06-22"
+version: "2.1.0"
+date-released: "2026-06-23"
 doi: "10.5281/zenodo.20806098"
 keywords:
   - synthetic-data

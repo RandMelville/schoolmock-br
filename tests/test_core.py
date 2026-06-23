@@ -1,4 +1,5 @@
 from schoolmock_br import Gerador, SchoolMockBR
+from schoolmock_br.core import _PREFIXOS_TRATAMENTO
 
 
 def test_seed_reprodutivel():
@@ -26,3 +27,13 @@ def test_facade_semear():
     primeiro = SchoolMockBR.gerar_aluno()
     SchoolMockBR.semear(99)
     assert SchoolMockBR.gerar_aluno() == primeiro
+
+
+def test_nomes_sem_pronome_de_tratamento():
+    # Crianças/adolescentes não têm "Dr./Sra." no nome (irreal no Censo Escolar).
+    gerador = Gerador(seed=2026)
+    for _ in range(500):
+        aluno = gerador.gerar_aluno("3º Ano")
+        for campo in ("nome_completo", "nome_mae"):
+            primeiro = aluno[campo].split(" ", 1)[0]
+            assert primeiro not in _PREFIXOS_TRATAMENTO, aluno[campo]
