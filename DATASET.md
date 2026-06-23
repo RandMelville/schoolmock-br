@@ -60,7 +60,7 @@ c019ce8572ef5028a79205f74d3ca1649cc5e0bba14a658feba6af07216a2f85  schoolmock-br-
 | Onde | Papel | Referência |
 |---|---|---|
 | Zenodo | Primário (DOI, preservação, CC-BY) | [10.5281/zenodo.20806934](https://doi.org/10.5281/zenodo.20806934) |
-| Hugging Face | Espelho (`load_dataset`, descoberta) | _a preencher_ |
+| Hugging Face | Espelho (`load_dataset`, descoberta) | [randmelville/schoolmock-br](https://huggingface.co/datasets/randmelville/schoolmock-br) |
 
 O record do dataset liga-se ao software (`is supplement to`
 [10.5281/zenodo.20806098](https://doi.org/10.5281/zenodo.20806098); `is derived from`

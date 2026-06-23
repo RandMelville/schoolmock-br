@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import shutil
 import sys
 import zipfile
 from pathlib import Path
@@ -47,7 +48,73 @@ AUTOR = "Randerson Oliveira Melville Rebouças (PPGIE/UFRGS)"
 # DOI do dataset no Zenodo (emitido na publicação). Preencher quando reservado;
 # enquanto None, o card mostra "(a ser emitido)".
 DOI_DATASET: str | None = "10.5281/zenodo.20806934"
+# Repositório espelho no Hugging Face (descoberta + load_dataset).
+HF_REPO = "randmelville/schoolmock-br"
 # -----------------------------------------------------------------------------
+
+
+def _card_hf(contagens: dict, conformidade: dict) -> str:
+    """Card do Hugging Face: front-matter com `configs` (3 tabelas) + uso load_dataset."""
+    doi = f"https://doi.org/{DOI_DATASET}" if DOI_DATASET else "(a ser emitido no Zenodo)"
+    return f"""---
+license: cc-by-4.0
+language:
+  - pt
+tags:
+  - synthetic
+  - education
+  - brazil
+  - lgpd
+  - inep
+pretty_name: {TITULO}
+size_categories:
+  - 10K<n<100K
+configs:
+  - config_name: alunos
+    data_files: data/alunos.csv
+  - config_name: turmas
+    data_files: data/turmas.csv
+  - config_name: escolas
+    data_files: data/escolas.csv
+---
+
+# {TITULO} v{DATASET_VERSION}
+
+Dataset **inteiramente sintético** (procedural, LGPD-safe) de escolas, turmas e
+alunos brasileiros, gerado pelo [SchoolMock-BR](https://github.com/RandMelville/schoolmock-br)
+v{LIB_VERSION}. **Todos os registros são fictícios — não correspondem a pessoas reais.**
+
+- **Escolas:** {contagens['escolas']} · **Turmas:** {contagens['turmas']} · **Alunos:** {contagens['alunos']}
+- **Conformidade** (verificador C1–C5): alunos {conformidade['alunos']['taxa']:.0%}, escolas {conformidade['escolas']['taxa']:.0%}
+- **Licença:** CC-BY 4.0
+- **Cópia citável (primária):** Zenodo, DOI {doi}
+- **Reprodutível:** `python scripts/gerar_dataset_oficial.py` (seed={SEED}, schoolmock-br {LIB_VERSION})
+
+## Uso
+
+```python
+from datasets import load_dataset
+
+alunos = load_dataset("{HF_REPO}", "alunos", split="train")
+escolas = load_dataset("{HF_REPO}", "escolas", split="train")
+turmas = load_dataset("{HF_REPO}", "turmas", split="train")
+```
+
+## Esquema
+
+**escolas:** `nome_escola, codigo_inep, endereco, cidade, uf, rede, fonte`
+**turmas:** `turma_id, codigo_inep, serie, turno, ano_letivo, qtd_alunos, fonte`
+**alunos:** `turma_id, codigo_inep, nome_completo, cpf, data_nascimento, nome_mae, matricula, situacao, serie_atual, fonte`
+
+Chaves: `codigo_inep` liga aluno/turma→escola; `turma_id` liga aluno→turma.
+Garantias por construção: CPF válido (C1), INEP↔UF (C2), idade↔série (C3),
+campos obrigatórios (C4) e unicidade de `codigo_inep`/`cpf`/`matricula` (C5).
+
+## Aviso
+
+Dado sintético **não** é dado pessoal (LGPD, art. 5º, I). Use livremente para
+testes, ensino e pesquisa, citando o DOI acima.
+"""
 
 
 def _card_md(contagens: dict, conformidade: dict) -> str:
@@ -192,6 +259,17 @@ def main() -> None:
     with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
         for p in no_zip:
             zf.write(p, arcname=f"{raiz}/{p.relative_to(out)}")
+
+    # Pasta pronta para o espelho no Hugging Face: CSVs em data/ (viewer),
+    # JSON relacional + metadados na raiz, card com `configs`. Upload direto.
+    hf = out / "hf-upload"
+    (hf / "data").mkdir(parents=True, exist_ok=True)
+    for t in ("escolas", "turmas", "alunos"):
+        shutil.copy(csv_dir / f"{t}.csv", hf / "data" / f"{t}.csv")
+    shutil.copy(json_path, hf / "schoolmock-br-dataset.json")
+    shutil.copy(csv_dir / "metadata.json", hf / "metadata.json")
+    shutil.copy(out / "LICENSE", hf / "LICENSE")
+    (hf / "README.md").write_text(_card_hf(c, conf), encoding="utf-8")
     print(f"  escolas={c['escolas']} turmas={c['turmas']} alunos={c['alunos']}")
     print(f"  conformidade alunos={conf['alunos']['taxa']} escolas={conf['escolas']['taxa']}")
     print(f"  JSON: {json_path}  ({json_path.stat().st_size / 1024:.0f} KB)")
@@ -199,6 +277,7 @@ def main() -> None:
     print(f"  Checksums: {sums_path}")
     print(f"  Card+licença: {out / 'README.md'}, {out / 'LICENSE'}")
     print(f"  ZIP p/ Zenodo: {zip_path}  ({zip_path.stat().st_size / 1024:.0f} KB)")
+    print(f"  Pasta p/ Hugging Face: {hf}/ (repo {HF_REPO})")
     print("OK.")
 
 
