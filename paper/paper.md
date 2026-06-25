@@ -139,8 +139,8 @@ conformant by construction.\label{fig:benchmark}](benchmark.png)
 
 The work is anchored by persistent, independently citable artifacts: a frozen
 reference dataset on Zenodo [@schoolmock_dataset] (100 schools, 450 classes,
-12,505 students; CC-BY 4.0) and a technical manual registered under ISBN
-978-65-01-89921-3 [@schoolmock_manual]. Early-adoption signals within weeks of
+12,505 students; CC-BY 4.0) and a technical manual (ISBN 978-65-01-89921-3) that
+documents the frozen v1 baseline [@schoolmock_manual]. Early-adoption signals within weeks of
 release include 40 downloads of the technical manual and 19 downloads of the
 dataset through its Hugging Face mirror. The generator is also being incorporated
 into the author's doctoral research pipeline, where it augments pilot data to
