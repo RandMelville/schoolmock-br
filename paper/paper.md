@@ -94,11 +94,19 @@ component (`core.py`) produces records from procedural domain rules, drawing
 locale values from Faker and seeding both `random` and `Faker` from a single
 `seed` for reproducibility. The independent `Verificador` component
 (`verifier.py`) audits any batch of records — whatever their origin — against the
-deterministic criteria C1–C5, encoded from external references: CPF check digits
-(`cpf.py`), IBGE/UF prefixes for INEP codes (`data/ibge.py`), and grade-to-age
-tables (`data/series.py`). Because the verifier is deterministic, the same input
-and reference date always yield the same verdict, which makes conformance testable
-and the headline benchmark reproducible.
+deterministic criteria below, encoded from external references:
+
+| Criterion | Checks |
+|---|---|
+| C1 | Valid CPF (mod-11 check digits), excluding known-invalid sequences |
+| C2 | INEP school code consistent with the federative unit (UF) via IBGE prefix |
+| C3 | Age coherent with school grade (birth date ↔ grade) |
+| C4 | Required fields present and non-empty |
+| C5 | Uniqueness of identifiers within a batch (CPF, enrolment, INEP code) |
+
+Because the verifier is deterministic, the same input and reference date always
+yield the same verdict, which makes conformance testable and the headline
+benchmark reproducible.
 
 A faithful reimplementation of the original v1 generator (`baseline.py`) is
 preserved as an immutable control and excluded from linting, so the structural
@@ -115,22 +123,28 @@ data is ingested and none can leak — privacy holds by construction.
 
 # Research impact statement
 
-The software underpins a frozen, citable reference dataset published on Zenodo
-[@schoolmock_dataset] (100 schools, 450 classes, 12,505 students; CC-BY 4.0),
-and a technical manual registered under ISBN 978-65-01-89921-3, giving the work
-persistent, independently citable artifacts. The verification layer yields a
-concrete, reproducible benchmark: under a fixed reference date (2026-06-15) and
-the default sample (600 student and 200 school records), the frozen v1 generator
+The verification layer yields a concrete, reproducible benchmark
+(\autoref{fig:benchmark}): under a fixed reference date (2026-06-15) and the
+default sample (600 student and 200 school records), the frozen v1 generator
 produces only 32.5% conformant student records (failing the age↔grade criterion
 C3) and 2.0% conformant school records (failing the INEP↔UF criterion C2),
-whereas the verified v2 reaches 100% conformance for both by construction —
-demonstrating, with an auditable control, that generation without verification
-silently emits structurally invalid data. The package is released on PyPI, is
+whereas the verified v2 reaches 100% conformance for both by construction. This
+demonstrates, with an auditable control, that generation without verification
+silently emits structurally invalid data.
+
+![Structural conformance of generated records before (v1, no verifier) and after
+(v2, with verifier), under seed 42 and reference date 2026-06-15. The verifier
+turns a generator that emits mostly non-conformant records into one that is
+conformant by construction.\label{fig:benchmark}](benchmark.png)
+
+The work is anchored by persistent, independently citable artifacts: a frozen
+reference dataset on Zenodo [@schoolmock_dataset] (100 schools, 450 classes,
+12,505 students; CC-BY 4.0) and a technical manual registered under ISBN
+978-65-01-89921-3 [@schoolmock_manual]. Early-adoption signals within weeks of
+release include 40 downloads of the technical manual and 19 downloads of the
+dataset through its Hugging Face mirror. The package is released on PyPI, is
 versioned, and runs continuous integration across Python 3.10–3.12, signalling
-community-readiness for adoption as a testing and teaching fixture.
-<!-- TODO (autor): se houver, inserir aqui evidência concreta e específica de uso
-externo — nº de downloads PyPI/Zenodo, trabalhos/disciplinas que já usam o
-dataset — pois o JOSS exige impacto demonstrado, não aspiracional. -->
+community-readiness for adoption as a reproducible testing and teaching fixture.
 
 # AI usage disclosure
 

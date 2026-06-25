@@ -45,6 +45,10 @@ dev = [
     "ruff>=0.4",
     "mypy>=1.8",
 ]
+# Apenas para regenerar a figura do benchmark do paper (scripts/gerar_figura_benchmark.py).
+figs = [
+    "matplotlib>=3.8",
+]
 
 [project.urls]
 Homepage = "https://github.com/RandMelville/schoolmock-br"
