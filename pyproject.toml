@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "schoolmock-br"
-version = "2.1.0"
+version = "2.1.1"
 description = "Gerador procedural de dados educacionais brasileiros sintéticos (LGPD-safe) com camada de verificação determinística."
 readme = "README.md"
 requires-python = ">=3.10"

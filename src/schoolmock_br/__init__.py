@@ -17,7 +17,7 @@ from .core import Gerador, SchoolMockBR
 from .cpf import cpf_marcado_para_teste, cpf_valido
 from .verifier import LoteReport, RegistroReport, Verificador, Violacao
 
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 
 __all__ = [
     "SchoolMockBR",
