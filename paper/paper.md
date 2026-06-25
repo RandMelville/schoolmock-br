@@ -33,43 +33,45 @@ the school grade.
 The distinguishing feature of the software is a **deterministic verification
 layer** that audits every generated record against five criteria (C1–C5): valid
 CPF (mod-11), INEP↔UF consistency, age↔grade coherence, presence of required
-fields, and uniqueness of identifiers within a batch. Generation is fully
-reproducible: a single `seed` is propagated to both `random` and `Faker`
-[@faker], so a given dataset is byte-for-byte reproducible. The package also
+fields, and uniqueness of identifiers within a batch. Generation is deterministic:
+a single `seed` is propagated to both `random` and `Faker` [@faker], making any
+dataset byte-for-byte reproducible for a fixed software version. The package also
 ships a relational dataset builder (school↔class↔student with referential
 integrity) and a CLI (`schoolmock gerar | verificar | benchmark | dataset`) that
 exposes generation, verification and export (JSON/CSV) without writing Python.
 
-The software is on PyPI (`pip install schoolmock-br`), is archived on Zenodo with
-a concept DOI [@schoolmock_software], documents the synthetic dataset it produces
-following the *Datasheets for Datasets* standard [@gebru2021datasheets], and
-publishes a frozen, citable dataset release [@schoolmock_dataset].
+The software is distributed on PyPI (`pip install schoolmock-br`) and archived on
+Zenodo under a concept DOI [@schoolmock_software]. Its synthetic output is
+documented following the *Datasheets for Datasets* methodology
+[@gebru2021datasheets], and a frozen, citable dataset release accompanies it
+[@schoolmock_dataset].
 
 # Statement of need
 
-Research and teaching in education in Brazil require microdata, but two obstacles
+Educational research and teaching in Brazil require microdata, but two obstacles
 recur. First, real student data falls under the Brazilian General Data Protection
 Law (LGPD, Lei nº 13.709/2018) [@lgpd2018], which is especially restrictive for
-the data of children and adolescents; using real records to test administrative
+data on children and adolescents; using real records to test administrative
 education software is therefore often neither necessary nor advisable. Second,
 naively generated synthetic data is frequently *structurally inconsistent*
 (e.g., a student's age incompatible with the declared grade, or an INEP code that
-does not match the state), and rarely reproducible — which undermines its use as
-a controlled fixture for testing and for sharing alongside research.
+does not match the state), and rarely reproducible — which undermines its use both
+as a controlled test fixture and as a shareable research artifact.
 
 `SchoolMock-BR` addresses both. Because records do not refer to any identified or
 identifiable natural person, they fall outside the LGPD's definition of personal
 data, supporting *privacy by design* and the principles of necessity and
-minimisation when exercising administrative education systems (record loading,
+minimization when testing administrative education systems (record loading,
 registration, conformance checks). Crucially, the software does not assume that
 *generating* data is the same as *guaranteeing* its validity: the verification
 layer makes structural conformance an explicit, auditable, deterministic step.
-Running the bundled benchmark (`schoolmock benchmark --seed 42`) contrasts a
-faithful reimplementation of the naive v1 generator against the verified v2:
-under seed 42, the naive generator yields 33.2% conformant student records
-(failing the age↔grade criterion C3) and 2.0% conformant school records (failing
-the INEP↔UF criterion C2), whereas the verified generator reaches 100%
-conformance for both by construction.
+The bundled benchmark (`schoolmock benchmark --seed 42`) contrasts a faithful
+reimplementation of the naive v1 generator with the verified v2. On a fixed
+reference date (2026-06-15) and the default sample (600 student and 200 school
+records), the naive generator yields 32.5% conformant student records (failing
+the age↔grade criterion C3) and 2.0% conformant school records (failing the
+INEP↔UF criterion C2), whereas the verified generator reaches 100% conformance
+for both by construction.
 
 The intended users are researchers and educators who need LGPD-safe fixtures for
 educational software, and developers of administrative education systems who need
@@ -79,7 +81,7 @@ comparison to be reproduced by anyone.
 
 # Acknowledgements
 
-This work was developed within the PPGIE/UFRGS doctoral programme. The synthetic
+This work was developed within the PPGIE/UFRGS doctoral program. The synthetic
 dataset is released under CC-BY 4.0 and the software under the MIT license.
 
 # References

@@ -146,6 +146,13 @@ pytest            # suíte de testes (a camada de verificação é parte dela)
 ruff check src tests
 ```
 
+## 🤝 Contribuindo e suporte
+
+Contribuições são bem-vindas. Veja o **[CONTRIBUTING.md](CONTRIBUTING.md)** para o
+fluxo de PR, como rodar testes/lint e os padrões do projeto. Para **relatar bugs,
+tirar dúvidas ou pedir suporte**, abra uma *issue* em
+[GitHub Issues](https://github.com/RandMelville/schoolmock-br/issues).
+
 ## 📚 Como citar
 
 Se este trabalho for útil em sua pesquisa, cite o software via o **DOI conceitual** do Zenodo
