@@ -22,6 +22,11 @@ SERIES_AMOSTRA = [
     "1ª Série EM", "2ª Série EM", "3ª Série EM",
 ]
 
+# Data de referência fixa do benchmark: torna o critério C3 (idade↔série), que é
+# calculado contra uma data, determinístico e reprodutível em qualquer dia. Sem
+# isto, `schoolmock benchmark` cairia em date.today() e a taxa do v1 variaria.
+DATA_REFERENCIA_PADRAO = date(2026, 6, 15)
+
 
 @dataclass
 class ResultadoBenchmark:
@@ -42,7 +47,7 @@ def rodar_benchmark(
     *, seed: int = 42, n_por_serie: int = 50, n_escolas: int = 200,
     data_referencia: date | None = None,
 ) -> list[ResultadoBenchmark]:
-    verificador = Verificador(data_referencia=data_referencia)
+    verificador = Verificador(data_referencia=data_referencia or DATA_REFERENCIA_PADRAO)
 
     v1 = SchoolMockBRv1(seed=seed)
     alunos_v1 = _gerar_alunos_variados(v1.gerar_aluno, n_por_serie)

@@ -13,6 +13,7 @@ import csv
 import io
 import json
 import sys
+from datetime import date
 
 from . import __version__
 from .benchmark import formatar_relatorio, rodar_benchmark
@@ -63,7 +64,8 @@ def _cmd_verificar(args: argparse.Namespace) -> int:
 
 
 def _cmd_benchmark(args: argparse.Namespace) -> int:
-    resultados = rodar_benchmark(seed=args.seed)
+    data_ref = date.fromisoformat(args.data_referencia) if args.data_referencia else None
+    resultados = rodar_benchmark(seed=args.seed, data_referencia=data_ref)
     print(formatar_relatorio(resultados))
     return 0
 
@@ -116,6 +118,11 @@ def build_parser() -> argparse.ArgumentParser:
 
     b = sub.add_parser("benchmark", help="Compara conformidade v1 (ingênuo) vs v2.")
     b.add_argument("--seed", type=int, default=42)
+    b.add_argument(
+        "--data-referencia", dest="data_referencia", default=None, metavar="AAAA-MM-DD",
+        help="Data de referência (ISO) para o critério idade↔série. "
+             "Padrão: data fixa do benchmark, para reprodutibilidade.",
+    )
     b.set_defaults(func=_cmd_benchmark)
 
     d = sub.add_parser("dataset", help="Constrói dataset relacional escola↔turma↔aluno.")

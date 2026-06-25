@@ -6,10 +6,11 @@ authors:
   - family-names: "Melville Rebouças"
     given-names: "Randerson Oliveira"
     affiliation: "PPGIE/UFRGS"
+    orcid: "https://orcid.org/0009-0005-3056-5074"
 repository-code: "https://github.com/RandMelville/schoolmock-br"
 license: MIT
-version: "2.1.0"
-date-released: "2026-06-23"
+version: "2.1.1"
+date-released: "2026-06-25"
 doi: "10.5281/zenodo.20806098"
 keywords:
   - synthetic-data

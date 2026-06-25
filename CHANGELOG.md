@@ -4,6 +4,20 @@ Todas as mudanças relevantes deste projeto são documentadas aqui.
 O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/)
 e o projeto adota [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 
+## [2.1.1] — 2026-06-25
+
+### Corrigido
+- **Benchmark reprodutível.** O `schoolmock benchmark` usava `date.today()` como
+  data de referência, tornando a taxa de conformidade do critério C3 (idade↔série)
+  dependente do dia da execução. Agora usa uma data de referência fixa
+  (2026-06-15) por padrão, com a nova flag `--data-referencia` para sobrescrever.
+  Os números do benchmark passam a ser determinísticos (v1 32,5% alunos / 2,0%
+  escolas → v2 100%/100%), travados por teste.
+
+### Adicionado
+- `paper/` com o manuscrito JOSS (`paper.md`, `paper.bib`, figura do benchmark) e
+  `CONTRIBUTING.md` (diretrizes de contribuição/suporte).
+
 ## [2.1.0] — 2026-06-23
 
 ### Corrigido
@@ -29,5 +43,6 @@ e o projeto adota [Versionamento Semântico](https://semver.org/lang/pt-BR/).
 - Enquadramento LGPD (dado sintético ≠ dado pessoal), `DATASHEET.md`
   (padrão Gebru et al.), CI (ruff + pytest 3.10–3.12).
 
+[2.1.1]: https://github.com/RandMelville/schoolmock-br/releases/tag/v2.1.1
 [2.1.0]: https://github.com/RandMelville/schoolmock-br/releases/tag/v2.1.0
 [2.0.0]: https://github.com/RandMelville/schoolmock-br/releases/tag/v2.0.0

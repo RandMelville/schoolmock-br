@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "schoolmock-br"
-version = "2.1.0"
+version = "2.1.1"
 description = "Gerador procedural de dados educacionais brasileiros sintéticos (LGPD-safe) com camada de verificação determinística."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -44,6 +44,10 @@ dev = [
     "pytest-cov>=4.0",
     "ruff>=0.4",
     "mypy>=1.8",
+]
+# Apenas para regenerar a figura do benchmark do paper (scripts/gerar_figura_benchmark.py).
+figs = [
+    "matplotlib>=3.8",
 ]
 
 [project.urls]
