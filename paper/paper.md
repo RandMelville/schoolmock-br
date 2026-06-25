@@ -10,12 +10,12 @@ tags:
   - software testing
 authors:
   - name: Randerson Oliveira Melville Rebouças
-    orcid: 0000-0000-0000-0000  # TODO: preencher ORCID real
+    orcid: 0009-0005-3056-5074
     affiliation: 1
 affiliations:
   - index: 1
     name: Programa de Pós-Graduação em Informática na Educação (PPGIE), Universidade Federal do Rio Grande do Sul (UFRGS), Brazil
-    # ror: 041yk2d64  # TODO: confirmar ROR da UFRGS antes de submeter
+    ror: 041yk2d64
 date: 25 June 2026
 bibliography: paper.bib
 ---
@@ -142,8 +142,11 @@ reference dataset on Zenodo [@schoolmock_dataset] (100 schools, 450 classes,
 12,505 students; CC-BY 4.0) and a technical manual registered under ISBN
 978-65-01-89921-3 [@schoolmock_manual]. Early-adoption signals within weeks of
 release include 40 downloads of the technical manual and 19 downloads of the
-dataset through its Hugging Face mirror. The package is released on PyPI, is
-versioned, and runs continuous integration across Python 3.10–3.12, signalling
+dataset through its Hugging Face mirror. The generator is also being incorporated
+into the author's doctoral research pipeline, where it augments pilot data to
+build training corpora for educational models — a concrete, ongoing use that
+drives continued development. The package is released on PyPI, is versioned, and
+runs continuous integration across Python 3.10–3.12, signalling
 community-readiness for adoption as a reproducible testing and teaching fixture.
 
 # AI usage disclosure
@@ -151,22 +154,18 @@ community-readiness for adoption as a reproducible testing and teaching fixture.
 Generative AI tools (Anthropic Claude, via the Claude Code CLI) were used to
 assist with portions of the software engineering and the preparation of this
 manuscript — including code refactoring, test scaffolding, documentation, and
-drafting and copy-editing of the paper text. All scientific framing, the
-domain rules and verification criteria (C1–C5), the experimental design, and the
+drafting and copy-editing of the paper text. All scientific framing, the domain
+rules and verification criteria (C1–C5), the experimental design, and the
 interpretation of results were determined by the author, who reviewed, edited, and
 validated every AI-assisted output and made all core design decisions. The author
 is solely responsible for the accuracy, originality, licensing, and legal and
 ethical compliance of the software and the paper.
-<!-- TODO (autor): confirmar/ajustar as ferramentas, versões e o escopo exato
-acima de modo que reflita fielmente o seu uso real antes de submeter. -->
 
 # Acknowledgements
 
-This work was developed within the PPGIE/UFRGS doctoral program.
-<!-- TODO (autor): declarar explicitamente o apoio financeiro — ex.: bolsa
-CAPES/CNPq (com nº de processo) — ou afirmar que não houve financiamento
-específico. O JOSS exige o reconhecimento de qualquer apoio financeiro. -->
-The synthetic dataset is released under CC-BY 4.0 and the software under the MIT
-license.
+This work was developed within the PPGIE/UFRGS doctoral program as a project
+parallel to the author's doctoral research. It received no specific grant from
+any funding agency. The synthetic dataset is released under CC-BY 4.0 and the
+software under the MIT license.
 
 # References
